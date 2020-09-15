@@ -1,1 +1,2 @@
-# Laboratorio2_EDII
+### Laboratorio2_EDII
+* Arbol B en disco
