@@ -1,4 +1,5 @@
 ﻿using System;
+using Bib_BTree;
 
 namespace Console_BTree
 {
@@ -6,6 +7,12 @@ namespace Console_BTree
     {
         static void Main(string[] args)
         {
+
+            ArbolB<int> arbolB = new ArbolB<int>();
+            string rooot = arbolB.GetRoot();
+
+
+            /*
             while (true)
             {
                 Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
@@ -30,6 +37,7 @@ namespace Console_BTree
                     Console.WriteLine("Ingresa un valor válido");
                 }
             }
+            */
         }
     }
 }

@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console_BTree", "Console_BTree.csproj", "{09EF0980-684A-4EB4-89B9-8123B6755FED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09EF0980-684A-4EB4-89B9-8123B6755FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09EF0980-684A-4EB4-89B9-8123B6755FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09EF0980-684A-4EB4-89B9-8123B6755FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09EF0980-684A-4EB4-89B9-8123B6755FED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
