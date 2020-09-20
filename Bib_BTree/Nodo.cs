@@ -11,56 +11,101 @@ namespace Bib_BTree
         public int grado { get; set; }
         public int Id { get; set; }
         public int Father { get; set; }
-        public List<T> Values { get; set; }
+        public List<string> Values { get; set; }
         public List<int> Children { get; set; }
 
         public int SizeNodoLenght => 5 * (grado - 1) + (grado * 5) + 4 + 4 + 5;
 
         public Nodo(int grado)
         {
-            Values = new List<T>();
+            Values = new List<string>();
             Children = new List<int>();
             this.grado = grado;
         }
 
-        public Nodo<T> Insert(T Value, string Id)
+        public void Insert(T Value, string Id)
         {
-            Nodo<T> prueba = null;
-            return prueba;
+            FileHandling fileHandling = new FileHandling();
+
+
+            Children = fileHandling.Obtener_Hijos(Id);
+
+            if (Children.Count == 0)
+            {
+                Values = fileHandling.Obtener_Valores(Id);
+
+                if (Values.Count < grado - 1)
+                {
+                    Values.Add(Value.ToString());
+                    Nodo<T> actual = new Nodo<T>(grado);
+                    actual.Id = Convert.ToInt32(Id.Trim());
+                    actual.Father = Convert.ToInt32(fileHandling.Obtener_Padre(Id));
+                    actual.Values = Values;
+                    actual.Values.Sort();
+                    actual.Children = Children;
+
+                }
+                else
+                {
+                    List<string> ValuesSeparar = new List<string>();
+                    ValuesSeparar = Values;
+                    ValuesSeparar.Add(Value.ToString());
+                    SplitNodo(ValuesSeparar);
+
+                }
+
+            }
+            else
+            {
+
+            }
+
         }
 
-        public Nodo<T> GetChildren(string idActual)
+        public void SplitNodo(List<string> values)
         {
-            Nodo<T> NodoActual = new Nodo<T>(grado);
-            using (StreamReader SR = new StreamReader("/Users/eber.g/Desktop/PrimerAño/2Ciclo2020/EstructuraDatos II/Laboratorios/Laboratorio_3/Laboratorio2_EDII/Bib_BTree/Archivos/ArbolDisco.txt"))
+            //grado par
+            if (grado % 2 == 0)
             {
-                string Line;
+                var ValorMedio = "";
+                var ArregloValoresPar = new List<string>();
+                ArregloValoresPar = ArregloValoresMayoresPar(values);
+                ValorMedio = ValorMedioPar(values);
 
-                while((Line = SR.ReadLine()) != null)
+
+            }
+            else if (grado % 2 != 0)
+            {
+
+            }
+        }
+
+        public List<string> ArregloValoresMayoresPar(List<string> values)
+        {
+            var ValoresMinimos = (grado / 2) - 1;
+            var ArregloValoresPar = new List<string>();
+            for (int i = 0; i < ValoresMinimos; i++)
+            {
+                ArregloValoresPar.Add(values[(values.Count - 1) - i]);
+            }
+            return ArregloValoresPar;
+        }
+
+        public string ValorMedioPar(List<string> values)
+        {
+            var ValoresMinimos = (grado / 2) - 1;
+            var valorMedio = "";
+            int i;
+            for (i = 0; i < ValoresMinimos + 1; i++)
+            {
+                if (i == ValoresMinimos)
                 {
-                    var idArchivo = Line.Substring(0, 4);
-                    if(idActual == idArchivo)
-                    {
-                        NodoActual.Id = Convert.ToInt32(idArchivo);
-                        NodoActual.Father = Convert.ToInt32(Line.Substring(6, 9));
-                        string hijos = Line.Substring(10, grado*5);
-                        string[] ListadoHijos = hijos.Split(';');
-                        for (int i = 0; i < ListadoHijos.Length; i++)
-                        {
-                            if(ListadoHijos[i] == "0000")
-                            {
-                                NodoActual.Children[i] = -1;
-                            }
-                        }
-
-                        string ValuesString = Line.Substring(grado*5, SizeNodoLenght);
-                        var j = 0;
-                        var p = 4;
-                      
-                    }
+                    valorMedio = (values[(values.Count - 1) - i]);
                 }
             }
-            return NodoActual;
+
+            return valorMedio;
         }
+
     }
 }
