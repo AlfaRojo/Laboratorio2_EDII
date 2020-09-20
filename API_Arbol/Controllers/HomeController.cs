@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using API_BTree.Helper;
+using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Bib_BTree.Helper;
 
-namespace API_BTree.Controller
+namespace API_Arbol.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : ControllerBase
     {
         [HttpGet]
@@ -18,6 +16,7 @@ namespace API_BTree.Controller
         {
             return new string[] { "Árbol B en Disco" };
         }
+
         /// <summary>
         /// Realizar recorrido del árbol según sea indicado por el usuario
         /// </summary>
@@ -31,6 +30,7 @@ namespace API_BTree.Controller
             //Recorridos
             return Ok();
         }
+
         /// <summary>
         /// Indica el grado del árbol a utilizar
         /// </summary>
@@ -39,13 +39,19 @@ namespace API_BTree.Controller
         /// <response code="500">El válir ingresado no es válido.</response>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Orden([FromBody] int grado)
+        public ActionResult Orden([FromForm] int grado)
         {
             int value = 0;
             if (int.TryParse(grado.ToString(), out value))
             {
                 if (value > 2)
                 {
+                    Data.Instance.ruta = $"Arboles\\{"Arbol grado " + value.ToString()}.txt";
+                    if (!Directory.Exists("Arboles"))
+                    {
+                        Directory.CreateDirectory("Arboles");
+                    }
+                    Directory.CreateDirectory("Arboles");
                     Data.grado = grado;
                     return Ok("El grado ha sido guardado correctamente.");
                 }
@@ -59,6 +65,7 @@ namespace API_BTree.Controller
                 throw new ArgumentException($"El valor {grado} debe ser numérico y mayor a 2.");
             }
         }
+
         /// <summary>
         /// Ingresa múltiples valores al árbol
         /// </summary>
@@ -76,6 +83,7 @@ namespace API_BTree.Controller
             }
             else { throw new ArgumentException($"El grado {Data.grado} del árbol es incorrecto o el archivo no cuenta con estructura Json."); }
         }
+
         /// <summary>
         /// Elimina por completo el árbol guardado actualmente
         /// </summary>
@@ -94,6 +102,7 @@ namespace API_BTree.Controller
                 return NotFound("El árbol no cuenta con valores para eliminar.");
             }
         }
+
         /// <summary>
         /// Eliminar un valór del árbol
         /// </summary>

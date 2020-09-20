@@ -16,7 +16,7 @@ namespace Bib_BTree
         {
             if(Root == null)
             {
-                Root = new Nodo<T>();
+                //Root = new Nodo<T>();
                 Root.Insert(Value, GetRoot());
             }
         }
@@ -30,10 +30,7 @@ namespace Bib_BTree
                 var Line = SR.ReadLine();
                 RootString = Line.Substring(0, 4);
             }
-
             return RootString;
         }
-          
-
     }
 }

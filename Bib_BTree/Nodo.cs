@@ -25,7 +25,8 @@ namespace Bib_BTree
 
         public Nodo<T> Insert(T Value, string Id)
         {
-
+            Nodo<T> prueba = null;
+            return prueba;
         }
 
         public Nodo<T> GetChildren(string idActual)
@@ -59,10 +60,7 @@ namespace Bib_BTree
                     }
                 }
             }
-
             return NodoActual;
-
         }
-
     }
 }

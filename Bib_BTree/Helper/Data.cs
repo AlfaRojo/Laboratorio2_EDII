@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API_BTree.Helper
+namespace Bib_BTree.Helper
 {
     public class Data
     {
@@ -18,6 +18,7 @@ namespace API_BTree.Helper
         }
         //Add structures
         public static int grado;
+        public string ruta;
         public List<string> arbol_Temp = new List<string>();
     }
 }

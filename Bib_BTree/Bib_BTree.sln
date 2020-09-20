@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bib_BTree", "Bib_BTree.csproj", "{CD0B0EA1-4839-4078-9FA6-1CBE59EE1FDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bib_BTree", "Bib_BTree.csproj", "{CD0B0EA1-4839-4078-9FA6-1CBE59EE1FDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_BTree", "..\API_BTree\API_BTree.csproj", "{BBF09670-09C8-4DD3-AE85-AB9D12FAFE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console_BTree", "..\Console_BTree\Console_BTree.csproj", "{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console_BTree", "..\Console_BTree\Console_BTree.csproj", "{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_BTree", "..\API_Arbol\API_BTree.csproj", "{1E35E47A-4813-4C47-9DC5-77BEE3F69799}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{CD0B0EA1-4839-4078-9FA6-1CBE59EE1FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD0B0EA1-4839-4078-9FA6-1CBE59EE1FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD0B0EA1-4839-4078-9FA6-1CBE59EE1FDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBF09670-09C8-4DD3-AE85-AB9D12FAFE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBF09670-09C8-4DD3-AE85-AB9D12FAFE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBF09670-09C8-4DD3-AE85-AB9D12FAFE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBF09670-09C8-4DD3-AE85-AB9D12FAFE72}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1312ADF-B1D1-4D51-B22C-8C00BC51895B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E35E47A-4813-4C47-9DC5-77BEE3F69799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E35E47A-4813-4C47-9DC5-77BEE3F69799}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E35E47A-4813-4C47-9DC5-77BEE3F69799}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E35E47A-4813-4C47-9DC5-77BEE3F69799}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
