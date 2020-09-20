@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bib_BTree
 {
-    public class FileHandling
+    public class FileHandling 
     {
         /// <summary>
         /// Devuelve una lista con posiciones
@@ -54,8 +54,9 @@ namespace Bib_BTree
         public List<string> Obtener_Valores(string father)
         {
             List<string> V = new List<string>();
-            V.Add("0008");
+            V.Add("0005");
             V.Add("0010");
+            V.Add("0015");
             return V;
         }
 
@@ -64,6 +65,8 @@ namespace Bib_BTree
             string p = "-1";
             return p;
         }
+
+
     }
 }
 

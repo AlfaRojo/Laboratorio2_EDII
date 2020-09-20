@@ -7,17 +7,15 @@ namespace Console_BTree
     {
         static void Main(string[] args)
         {
-
-            ArbolB<int> arbolB = new ArbolB<int>();
-            string rooot = arbolB.GetRoot();
-
-
-            /*
+            Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
+            Console.WriteLine("Ingrese el grado del árbol");
+            var grado = Convert.ToInt16(Console.ReadLine());
+            
             while (true)
             {
-                Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
-                Console.WriteLine("1)Ingresar valores");
-                Console.WriteLine("Salir");
+               
+                Console.WriteLine("\n1) Ingresar valores");
+                Console.WriteLine("2) Salir \n");
                 int resultado = 0;
                 int.TryParse(Console.ReadLine(), out resultado);
                 if (resultado == 1)
@@ -27,6 +25,9 @@ namespace Console_BTree
                     int ingresado = 0;
                     int.TryParse(Console.ReadLine(), out ingresado);
                     //Llamar árbol
+                    ArbolB<string> arbolB = new ArbolB<string>(grado);
+                    string ingresado1 = $"{ingresado:0000;-000}";
+                    arbolB.Insert(ingresado1);
                 }
                 else if (resultado == 2)
                 {
@@ -37,7 +38,7 @@ namespace Console_BTree
                     Console.WriteLine("Ingresa un valor válido");
                 }
             }
-            */
+            
         }
     }
 }

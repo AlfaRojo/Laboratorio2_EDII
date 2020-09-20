@@ -34,7 +34,7 @@ namespace Bib_BTree
             {
                 Values = fileHandling.Obtener_Valores(Id);
 
-                if (Values.Count < grado - 1)
+                if (Values.Count < grado - 1 )
                 {
                     Values.Add(Value.ToString());
                     Nodo<T> actual = new Nodo<T>(grado);
@@ -50,6 +50,7 @@ namespace Bib_BTree
                     List<string> ValuesSeparar = new List<string>();
                     ValuesSeparar = Values;
                     ValuesSeparar.Add(Value.ToString());
+                    ValuesSeparar.Sort();
                     SplitNodo(ValuesSeparar);
 
                 }
@@ -107,5 +108,10 @@ namespace Bib_BTree
             return valorMedio;
         }
 
+        //Convertir el objeto en una linea de string
+        public void ConvertValuesToString()
+        {
+
+        }
     }
 }
