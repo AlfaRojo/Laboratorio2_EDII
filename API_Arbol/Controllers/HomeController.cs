@@ -46,13 +46,14 @@ namespace API_Arbol.Controllers
             {
                 if (value > 2)
                 {
+                    Data.grado = grado;
                     Data.Instance.ruta = $"Arboles\\{"Arbol grado " + value.ToString()}.txt";
                     if (!Directory.Exists("Arboles"))
                     {
                         Directory.CreateDirectory("Arboles");
                     }
-                    Directory.CreateDirectory("Arboles");
-                    Data.grado = grado;
+                    Bib_BTree.FileHandling archivo = new Bib_BTree.FileHandling();
+                    archivo.Crear_Archivo();
                     return Ok("El grado ha sido guardado correctamente.");
                 }
                 else
