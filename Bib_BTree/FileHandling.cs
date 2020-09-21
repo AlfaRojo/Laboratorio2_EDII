@@ -8,6 +8,9 @@ namespace Bib_BTree
 {
     public class FileHandling 
     {
+        /// <summary>
+        /// Se realiza la creación del archivo en la ruta del proyecto
+        /// </summary>
         public void Crear_Archivo()
         {
             if (!File.Exists(Data.Instance.ruta))
@@ -34,8 +37,40 @@ namespace Bib_BTree
             retorno.Add(father);
             retorno.Add(lastNode.ToString());
             retorno.Add(lastAvNode.ToString());
-            //Escribir
+            string archivado = string.Empty;
+            foreach (var item in retorno)
+            {
+                archivado += item;
+            }
+            using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
+            {
+                outfile.WriteLine(archivado);
+            }
             return retorno;
+        }
+
+        /// <summary>
+        /// Se recibe un nodo que compara IDs para ingresar al archivo
+        /// </summary>
+        public void Ingresar_Informacion(int id, int padre, List<int> hijos, List<string> valores)
+        {
+            using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
+            {
+                using (StreamReader lectura = new StreamReader(Data.Instance.ruta))
+                {
+                    while (lectura.Peek() > -1)
+                    {
+                        string linea = lectura.ReadLine();
+                        if (!String.IsNullOrEmpty(linea))
+                        {
+                            if (linea.StartsWith(id.ToString()))
+                            {
+
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public List<string> ListadoValoresMayores()
