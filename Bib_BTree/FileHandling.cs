@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Bib_BTree
 {
-    public class FileHandling 
+    public class FileHandling<T> where T : IComparable
     {
         /// <summary>
         /// Se realiza la creación del archivo en la ruta del proyecto
@@ -52,7 +52,7 @@ namespace Bib_BTree
         /// <summary>
         /// Se recibe un nodo que compara IDs para ingresar al archivo
         /// </summary>
-        public void Ingresar_Informacion(int id, int padre, List<int> hijos, List<string> valores)
+        public void Ingresar_Informacion(Nodo<T> node)
         {
             using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
             {
@@ -63,33 +63,28 @@ namespace Bib_BTree
                         string linea = lectura.ReadLine();
                         if (!String.IsNullOrEmpty(linea))
                         {
-                            if (linea.StartsWith(id.ToString()))
-                            {
+                           
 
-                            }
                         }
                     }
                 }
             }
         }
 
-        public List<string> ListadoValoresMayores()
-        {
-            List<string> l = new List<string>();
-            l.Add("0015");
-            return l;
-        }
+
         public string Obtener_Raiz()
         {
             string r = "0001";
             return r;
         }
+
         /// <summary>
         /// Lista[0] => Hijos menores
         /// Lista[1] => Hijos mayores
         /// </summary>
         /// <param name="father"></param>
         /// <returns></returns>
+       
         public List<int> Obtener_Hijos(string father)
         {
             List<int> H = new List<int>();
@@ -111,7 +106,14 @@ namespace Bib_BTree
             return p;
         }
 
-
+        public List<string> Obtener_Metadata()
+        {
+            List<string> M = new List<string>();
+            M.Add("0001");
+            M.Add("0000");
+            M.Add("0002");
+            return M; 
+        }
     }
 }
 
