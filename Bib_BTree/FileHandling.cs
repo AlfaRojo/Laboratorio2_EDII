@@ -1,11 +1,21 @@
-﻿using System;
+﻿using Bib_BTree.Helper;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Bib_BTree
 {
     public class FileHandling 
     {
+        public void Crear_Archivo()
+        {
+            if (!File.Exists(Data.Instance.ruta))
+            {
+                string start = $"000{Data.grado.ToString("000;-000")}|0000|0001|";
+                File.WriteAllText(Data.Instance.ruta, start);
+            }
+        }
         /// <summary>
         /// Devuelve una lista con posiciones
         /// <root><father>
@@ -17,7 +27,7 @@ namespace Bib_BTree
         /// <param name="lastNode"></param>
         /// <param name="lastAvNode"></param>
         /// <returns></returns>
-        public List<string> CrearArchivo(string root, string father, int lastNode, int lastAvNode)
+        public List<string> Metadata(string root, string father, int lastNode, int lastAvNode)
         {
             List<string> retorno = new List<string>();
             retorno.Add(root);
