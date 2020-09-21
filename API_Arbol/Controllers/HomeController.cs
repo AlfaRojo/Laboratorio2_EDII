@@ -96,6 +96,10 @@ namespace API_Arbol.Controllers
         {
             if (Data.Instance.arbol_Temp.Count > 0)
             {
+                if (Directory.Exists(Data.Instance.ruta))
+                {
+                    Directory.Delete(Data.Instance.ruta);
+                }
                 return Ok("Todo el árbol ha sido eliminado.");
             }
             else
