@@ -52,7 +52,7 @@ namespace Bib_BTree
         /// <summary>
         /// Se recibe un nodo que compara IDs para ingresar al archivo
         /// </summary>
-        public void Ingresar_Informacion(Nodo<T> node)
+        public void Ingresar_Informacion(NodoM<T> node)
         {
             using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
             {
@@ -72,9 +72,9 @@ namespace Bib_BTree
         }
 
 
-        public string Obtener_Raiz()
+        public int ID_Obtener_Raiz(int Father)
         {
-            string r = "0001";
+            int r = 1;
             return r;
         }
 
