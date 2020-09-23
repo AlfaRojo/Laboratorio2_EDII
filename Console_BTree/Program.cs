@@ -11,6 +11,22 @@ namespace Console_BTree
             Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
             Console.WriteLine("Ingrese el grado del árbol");
             var grado = Convert.ToInt16(Console.ReadLine());
+            var Arbol = new ArbolB<int>(grado);
+            var NodoRaiz = new NodoM<int>(grado);
+            var NodoHijo1 = new NodoM<int>(grado);
+            var NodoHijo2 = new NodoM<int>(grado);
+
+            
+            NodoRaiz.Values.Add(41);
+            NodoHijo1.Values.Add(5);
+            NodoHijo2.Values.Add(48);
+            NodoHijo2.Values.Add(62);
+            NodoRaiz.Children.Add(NodoHijo1);
+            NodoRaiz.Children.Add(NodoHijo2);
+            
+
+            NodoRaiz = NodoRaiz.InsertTree(NodoRaiz, null, 70);
+
 
             while (true)
             {

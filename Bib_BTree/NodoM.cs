@@ -32,7 +32,7 @@ namespace Bib_BTree
                 }
                 else
                 {
-                    SplitTree(Actual, Intermedio, Nuevo);
+                   Actual = SplitTree(Actual, Intermedio, Nuevo);
                 }
             }
             else
@@ -40,14 +40,14 @@ namespace Bib_BTree
                 int i;
                 for (i = 0; i < Actual.Values.Count; i++)
                 {
-                    if(Actual.Values[i].CompareTo(Nuevo) == -1)
+                    if(Nuevo.CompareTo(Actual.Values[i]) == -1)
                     {
-                        InsertTree(Actual.Children[i], Children[i], Nuevo);
+                       Actual.Children[i] = InsertTree(Actual.Children[i], Children[i], Nuevo);
                     }
                 }
                 if (i == Actual.Values.Count)
                 {
-                    InsertTree(Actual.Children[i], Actual, Nuevo);
+                    Actual.Children[i] = InsertTree(Actual.Children[i], Actual, Nuevo);
                 }
             }
             return Actual;
@@ -55,13 +55,13 @@ namespace Bib_BTree
 
         public NodoM<T> SplitTree(NodoM<T> Actual, NodoM<T> Intermedio,T Nuevo)
         {
-            if (Actual.Children.Count == 0)
+            if (Intermedio.Children.Count == 0)
             {
-                Nodo<T> NodoS = new Nodo<T>(grado);
+                NodoM<T> NodoS = new NodoM<T>(grado);
                 for (int i = 0; i < Actual.Values.Count + 1; i++)
                 {
-                    NodoS.Values[i] = Actual.Values[i];
-                    if (i == Actual.Values.Count) NodoS.Values[i] = Nuevo;
+                    if (i == Actual.Values.Count) NodoS.Values.Add(Nuevo);
+                    else NodoS.Values.Add(Actual.Values[i]);
                 }
                 NodoS.Values.Sort();
 
@@ -79,7 +79,7 @@ namespace Bib_BTree
                 Nuevo1.Father = Nuevo1.Id + 1;
                 for (int i = 0; i < ArregloM.Count; i++)
                 {
-                    Nuevo1.Values[i] = ArregloM[i];
+                    Nuevo1.Values.Add(ArregloM[i]);
                 }
 
                 //NodoAnterior
@@ -88,7 +88,7 @@ namespace Bib_BTree
                 Anterior.Father = Nuevo1.Id + 1;
                 for (int i = 0; i < posicion; i++)
                 {
-                    Anterior.Values[i] = Actual.Values[i];
+                    Anterior.Values.Add(NodoS.Values[i]);
                 }
 
                 //Raiz
@@ -96,7 +96,7 @@ namespace Bib_BTree
                 Raiz.Id = Convert.ToInt32(metadata[2]) + 1;
                 for (int i = 0; i < ValorM.Count; i++)
                 {
-                    Raiz.Values[i] = ValorM[i];
+                    Raiz.Values.Add(ValorM[i]);
                 }
                 
                 Raiz.Children.Add(Anterior);
@@ -108,13 +108,9 @@ namespace Bib_BTree
             else
             {
                 Nodo<T> NodoS = new Nodo<T>(grado);
-                for (int X = 0; X < Actual.Values.Count + 1; X++)
-                {
-                    NodoS.Values[X] = Actual.Values[X];
-                    if (X == Actual.Values.Count) NodoS.Values[X] = Nuevo;
-                }
+                NodoS.Values.AddRange(Actual.Values);
+                NodoS.Values.Add(Nuevo);
                 NodoS.Values.Sort();
-
 
                 int posicion = (grado % 2 == 0) ? (grado / 2) - 1 : (grado - 1) / 2;
                 var FileHandling = new FileHandling<T>();
@@ -123,46 +119,43 @@ namespace Bib_BTree
                 var ValorM = ValorMedioS(NodoS.Values);
 
                 //NodoNuevo
-                NodoM<T> Nuevo1 = new NodoM<T>(grado);
-                Nuevo1.Id = Convert.ToInt32(metadata[2]);
-                Nuevo1.Father = Convert.ToInt32(metadata[1]); //Preguntar si es la raiz
-                for (int X = 0; X < ArregloM.Count; X++)
-                {
-                    Nuevo1.Values[X] = ArregloM[X];
-                }
+                NodoM<T> NodoMayores = new NodoM<T>(grado);
+                NodoMayores.Id = Convert.ToInt32(metadata[2]);
+                NodoMayores.Father = Convert.ToInt32(metadata[0]); //Preguntar si es la raiz
+                NodoMayores.Values.AddRange(ArregloM);
 
                 //NodoAnterior
                 NodoM<T> Anterior = new NodoM<T>(grado);
                 Anterior.Id = Actual.Id;
-                Anterior.Father = Nuevo1.Id + 1;
+                Anterior.Father = NodoMayores.Id + 1;
                 for (int X = 0; X < posicion; X++)
                 {
-                    Anterior.Values[X] = Actual.Values[X];
+                    Anterior.Values.Add(Actual.Values[X]);
                 }
+                
 
                 //Obtener la raiz
                 int i;
 
-                if (Intermedio.Values.Count < grado)
+                if (Intermedio.Values.Count < grado - 1)
                 {
                     for (i = 0; i < Intermedio.Values.Count; i++)
                     {
-                        if (Intermedio.Values[i].CompareTo(ValorM) == -1)
+                        if (Intermedio.Values[i].CompareTo(ValorM[0]) == -1)
                         {
+
                             if (Intermedio.Children[i + 1] != null)
                             {
                                 Intermedio.Values.Add(Nuevo);
                                 Intermedio.Values.Sort();
                                 //CorrerMisHijos
-                                for (int j = Intermedio.Children.Count; j > Intermedio.Children.Count - 1; j--)
+                                for (int j = 0; j < Intermedio.Values.Count; j++)
                                 {
-                                    Intermedio.Children[j] = Children[j];
+                                    Intermedio.Children.Add(Children[j]);
                                 }
 
                                 Intermedio.Children[i] = Children[i];
                             }
-
-
 
                         }
                     }
@@ -175,6 +168,7 @@ namespace Bib_BTree
 
 
             }
+            return Actual;
 
 
         }

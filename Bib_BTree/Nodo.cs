@@ -90,7 +90,8 @@ namespace Bib_BTree
 
         }
 
-
+        /*
+        
         //Insert
         public void InsertTree(Nodo<T> nodo, T value)
         {
@@ -183,128 +184,6 @@ namespace Bib_BTree
           
         }
 
-
-        /*
-       public void Insert(T Value, string Id)
-       {
-           FileHandling<T> fileHandling = new FileHandling<T>();
-
-
-           Children = fileHandling.Obtener_Hijos(Id);
-
-           if (Children.Count == 0)
-           {
-               Values = fileHandling.Obtener_Valores(Id);
-
-               if (Values.Count < grado - 1 )
-               {
-                   Values.Add(Value.ToString());
-                   Nodo<T> actual = new Nodo<T>(grado);
-                   actual.Id = Convert.ToInt32(Id.Trim('0'));
-                   actual.Father = Convert.ToInt32(fileHandling.Obtener_Padre(Id));
-                   actual.Values = Values;
-                   actual.Values.Sort();
-                   actual.Children = Children;
-
-                   //ModificarArchivo
-
-               }
-               else
-               {
-                   List<string> ValuesSeparar = new List<string>();
-                   ValuesSeparar = Values;
-                   ValuesSeparar.Add(Value.ToString());
-                   ValuesSeparar.Sort();
-                   SplitNodo(ValuesSeparar, Id);
-
-               }
-
-           }
-           else
-           {
-
-           }
-
-       }
-
-       public void SplitNodo(List<string> values, string Id)
-       {
-           //grado par
-           if (grado % 2 == 0)
-           {
-               var ValorMedio = "";
-               var ArregloValoresPar = new List<string>();
-               ArregloValoresPar = ArregloValoresMayores(values);
-               ValorMedio = ValorMedioS(values);
-
-               var Children = new List<int>();
-               var FileHandling = new FileHandling<T>();
-               Children = FileHandling.Obtener_Hijos(Id);
-
-               if(Children.Count  == 0)
-               {
-                   var ListMetadata = FileHandling.Obtener_Metadata();
-                   //Raiz, UltimoNodoAgregado, SiguienteNodoDisponible
-                   Nodo<T> ProximoDisponible = new Nodo<T>(grado);
-                   ProximoDisponible.Id = Convert.ToInt16(ListMetadata[2]);
-                   ProximoDisponible.Values = ArregloValoresPar;
-
-                   FileHandling.Ingresar_Informacion(ProximoDisponible);
-
-
-                   Nodo<T> NuevaRaiz = new Nodo<T>(grado);
-                   NuevaRaiz.Id = ProximoDisponible.Id + 1;
-                   NuevaRaiz.Children.Add(Convert.ToInt32(Id));
-                   NuevaRaiz.Children.Add(ProximoDisponible.Id);
-                   NuevaRaiz.Values.Add(ValorMedio);
-
-                   var ValuesR = FileHandling.Obtener_Valores(Id);
-
-                   if(Values.Count < grado - 1 )
-                   {
-                       ValuesR.Add(ValorMedio);
-                       ValuesR.Sort();
-                       NuevaRaiz.Values = ValuesR;
-
-                       var Childrens = FileHandling.Obtener_Hijos(Id); //1,2,0, 0 
-
-                       if (Childrens.Count < grado )
-                       {
-                           if(Childrens[Childrens.Count -1] == 0)
-                           {
-
-                           }
-
-                       }
-                       else if(Childrens.Count == 0)
-                       {
-                           Children.Add(Convert.ToInt32(Id));
-                           Children.Add(ProximoDisponible.Id);
-                       }
-
-                   }
-                   else
-                   {
-
-                   }
-
-
-
-
-
-               }
-
-
-           }
-           else
-           {
-
-           }
-       }
-
-       */
-
-
-
+        */
     }
 }

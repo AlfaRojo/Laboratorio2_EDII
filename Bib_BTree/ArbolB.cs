@@ -20,7 +20,7 @@ namespace Bib_BTree
             {
                 Root = new Nodo<T>(Grado);
                 FileHandling<T> fileHandling = new FileHandling<T>();
-                Root.Insert(Value, fileHandling.Obtener_Raiz(GetRoot()));
+                //Root.Insert(Value, fileHandling.Obtener_Raiz(GetRoot()));
 
             }
         }
