@@ -18,6 +18,21 @@ namespace Bib_BTree
             this.grado = grado;
         }
 
+        public bool isleaf
+        {
+            get { return this.Children.Count == 0; }
+        }
+
+        public bool maxLength
+        {
+            get { return this.Values.Count == grado; }
+        }
+
+        public bool minLength
+        {
+            get { return this.Values.Count == grado - 1;  }
+        }
+
         public string ToSizeText()
         {
             var ChildrenString = "";
@@ -32,6 +47,7 @@ namespace Bib_BTree
                 else ChildrenString += $"{item:00000;-0000}";
 
             }
+
             addSimbol = 0;
             foreach (var item in Values)
             {
