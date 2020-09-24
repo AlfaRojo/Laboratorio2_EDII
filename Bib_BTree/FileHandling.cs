@@ -52,7 +52,7 @@ namespace Bib_BTree
         /// <summary>
         /// Se recibe un nodo que compara IDs para ingresar al archivo
         /// </summary>
-        public void Ingresar_Informacion(NodoM<T> node)
+        public void Ingresar_Informacion(Nodo<T> node)
         {
             using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
             {

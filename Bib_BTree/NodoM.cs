@@ -18,6 +18,30 @@ namespace Bib_BTree
             this.grado = grado;
         }
 
+        public string ToSizeText()
+        {
+            var ChildrenString = "";
+            var ValuesString = "";
+
+            var addSimbol = 0;
+
+            foreach (var item in Children)
+            {
+                addSimbol++;
+                if (addSimbol < grado) ChildrenString += $"{item.Id:00000;-0000};";
+                else ChildrenString += $"{item:00000;-0000}";
+
+            }
+            addSimbol = 0;
+            foreach (var item in Values)
+            {
+                addSimbol++;
+                if (addSimbol < grado - 1) ValuesString += $"{string.Format("{0, -150}", item.Value)};";
+                else ValuesString += $"{string.Format("{0, -150}", item.Value)}";
+            }
+
+            return $"{Id:00000:-0000}|{Father:00000:-0000}|{ChildrenString}|{ValuesString}";
+        }
         
         public List<Map<TKey,TNext>> ArregloValoresMayores(List<Map<TKey, TNext>> values)
         {

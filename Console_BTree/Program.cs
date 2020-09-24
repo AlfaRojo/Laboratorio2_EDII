@@ -8,7 +8,6 @@ namespace Console_BTree
     {
         static void Main(string[] args)
         {
-           
             Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
             Console.WriteLine("Ingrese el grado del árbol");
             var grado = Convert.ToInt16(Console.ReadLine());

@@ -13,5 +13,6 @@ namespace Bib_BTree
         {
             return this.Value.Equals(other.Value) && this.Next.Equals(other.Next);  
         }
+
     }
 }
