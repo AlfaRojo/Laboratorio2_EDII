@@ -52,24 +52,24 @@ namespace Bib_BTree
         /// <summary>
         /// Se recibe un nodo que compara IDs para ingresar al archivo
         /// </summary>
-        public void Ingresar_Informacion(Nodo<T> node)
-        {
-            using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
-            {
-                using (StreamReader lectura = new StreamReader(Data.Instance.ruta))
-                {
-                    while (lectura.Peek() > -1)
-                    {
-                        string linea = lectura.ReadLine();
-                        if (!String.IsNullOrEmpty(linea))
-                        {
+        //public void Ingresar_Informacion(Nodo<T> node)
+        //{
+        //    using (StreamWriter outfile = new StreamWriter(Data.Instance.ruta))
+        //    {
+        //        using (StreamReader lectura = new StreamReader(Data.Instance.ruta))
+        //        {
+        //            while (lectura.Peek() > -1)
+        //            {
+        //                string linea = lectura.ReadLine();
+        //                if (!String.IsNullOrEmpty(linea))
+        //                {
                            
 
-                        }
-                    }
-                }
-            }
-        }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
 
         public int ID_Obtener_Raiz(int Father)

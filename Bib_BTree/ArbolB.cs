@@ -1,17 +1,21 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bib_BTree
 {
     public class ArbolB<TKey, T> where TKey : IComparable<TKey>
     {
-        public ArbolB<TKey, T> Raiz { get; set; }
+        public Nodo<TKey, T> Raiz { get; set; }
         public int Grado { get; set; }
+        public int Altura { get; private set; }
 
         public ArbolB(int grado)
         {
+            this.Raiz = new Nodo<TKey, T>(grado);
             this.Grado = grado;
+            this.Altura = 1;
         }
 
         public void Insertar(TKey new_key, T nuevoApuntador)
@@ -19,7 +23,7 @@ namespace Bib_BTree
             InsertarRecursivo(this.Raiz, new_key, nuevoApuntador, null);
         }
 
-        private void InsertarRecursivo(ArbolB<TKey, T> nodo, TKey nuevaLlave, T nuevoApuntador, ArbolB<TKey, T> nodoPadre)
+        private void InsertarRecursivo(Nodo<TKey, T> nodo, TKey nuevaLlave, T nuevoApuntador, Nodo<TKey, T> nodoPadre)
         {
             int posicionInsertar = nodo.Entradas.TakeWhile(entry => nuevaLlave.CompareTo(entry.LLave) >= 0).Count();
             //Es hoja
@@ -27,13 +31,13 @@ namespace Bib_BTree
             {
                 if (this.Raiz == nodo)
                 {
-                    this.Raiz.Entradas.Insert(posicionInsertar, new Entry<TKey, T>() { LLave = nuevaLlave, Apuntador = nuevoApuntador });
+                    this.Raiz.Entradas.Insert(posicionInsertar, new BEntry<TKey, T>() { LLave = nuevaLlave, Apuntador = nuevoApuntador });
                     if (this.Raiz.AlcanzaMaximaEntrada)
                     {
                         // nuevo nodo y se necesita dividir
-                        ArbolB<TKey, T> viejaRaiz = this.Raiz;
-                        this.Raiz = new BNodo<TKey, T>(this.Grado);
-                        this.Raiz.Hijos.Add(viejaRaiz);
+                        Nodo<TKey, T> viejaRaiz = this.Raiz;
+                        this.Raiz = new Nodo<TKey, T>(this.Grado);
+                        this.Raiz.Children.Add(viejaRaiz);
                         this.DividirHijo(this.Raiz, 0, viejaRaiz);
                         this.Altura++;
                     }
@@ -41,7 +45,7 @@ namespace Bib_BTree
                 }
                 else
                 {
-                    nodo.Entradas.Insert(posicionInsertar, new Entry<TKey, T>() { LLave = nuevaLlave, Apuntador = nuevoApuntador });
+                    nodo.Entradas.Insert(posicionInsertar, new BEntry<TKey, T>() { LLave = nuevaLlave, Apuntador = nuevoApuntador });
                     if (nodo.AlcanzaMaximaEntrada)
                     {
                         posicionInsertar = nodoPadre.Entradas.TakeWhile(entry => nuevaLlave.CompareTo(entry.LLave) >= 0).Count();
@@ -53,14 +57,14 @@ namespace Bib_BTree
             //No es Hoja
             else
             {
-                this.InsertarRecursivo(nodo.Hijos[posicionInsertar], nuevaLlave, nuevoApuntador, nodo);
+                this.InsertarRecursivo(nodo.Children[posicionInsertar], nuevaLlave, nuevoApuntador, nodo);
                 if (nodoPadre == null)
                 {
                     if (nodo.AlcanzaMaximaEntrada)
                     {
-                        ArbolB<TKey, T> viejaRaiz = this.Raiz;
-                        this.Raiz = new BNodo<TKey, T>(this.Grado);
-                        this.Raiz.Hijos.Add(viejaRaiz);
+                        Nodo<TKey, T> viejaRaiz = this.Raiz;
+                        this.Raiz = new Nodo<TKey, T>(this.Grado);
+                        this.Raiz.Children.Add(viejaRaiz);
                         this.DividirHijo(this.Raiz, 0, viejaRaiz);
                         this.Altura++;
                     }
@@ -78,10 +82,10 @@ namespace Bib_BTree
 
         }
 
-        private void DividirHijo(ArbolB<TKey, T> padreNodo, int nodoCorrer, ArbolB<TKey, T> nodoMover)
+        private void DividirHijo(Nodo<TKey, T> padreNodo, int nodoCorrer, Nodo<TKey, T> nodoMover)
         {
 
-            var nuevoNodo = new ArbolB<TKey, T>(this.Grado);
+            var nuevoNodo = new Nodo<TKey, T>(this.Grado);
             if (Grado % 2 == 0)
             {
                 padreNodo.Entradas.Insert(nodoCorrer, nodoMover.Entradas[(this.Grado / 2) - 1]);
@@ -105,16 +109,16 @@ namespace Bib_BTree
             {
                 if (Grado % 2 == 0)
                 {
-                    nuevoNodo.Hijos.AddRange(nodoMover.Hijos.GetRange((this.Grado / 2), (this.Grado / 2) + 1));
-                    nodoMover.Hijos.RemoveRange((this.Grado / 2), (this.Grado / 2) + 1);
+                    nuevoNodo.Children.AddRange(nodoMover.Children.GetRange((this.Grado / 2), (this.Grado / 2) + 1));
+                    nodoMover.Children.RemoveRange((this.Grado / 2), (this.Grado / 2) + 1);
                 }
                 else
                 {
-                    nuevoNodo.Hijos.AddRange(nodoMover.Hijos.GetRange((this.Grado / 2) + 1, (this.Grado / 2) + 1));
-                    nodoMover.Hijos.RemoveRange((this.Grado / 2) + 1, (this.Grado / 2) + 1);
+                    nuevoNodo.Children.AddRange(nodoMover.Children.GetRange((this.Grado / 2) + 1, (this.Grado / 2) + 1));
+                    nodoMover.Children.RemoveRange((this.Grado / 2) + 1, (this.Grado / 2) + 1);
                 }
             }
-            padreNodo.Hijos.Insert(nodoCorrer + 1, nuevoNodo);
+            padreNodo.Children.Insert(nodoCorrer + 1, nuevoNodo);
         }
 
 

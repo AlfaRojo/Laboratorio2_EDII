@@ -22,6 +22,30 @@ namespace Bib_BTree
 
         public int SizeNodoLenght => 5 * (grado - 1) + (grado * 5) + 4 + 4 + 5;
 
+        #region Memory
+        public bool EsHoja
+        {
+            get
+            {
+                return this.Children.Count == 0;
+            }
+        }
+        public bool AlcanzaMaximaEntrada
+        {
+            get
+            {
+                return this.Entradas.Count == (this.grado);
+            }
+        }
+        public bool AlcanzaMinimaEntrada
+        {
+            get
+            {
+                return this.Entradas.Count == this.grado - 1;
+            }
+        }
+        #endregion
+
         public List<string> ArregloValoresMayores(List<string> values)
         {
             var ArregloValoresM = new List<string>();
