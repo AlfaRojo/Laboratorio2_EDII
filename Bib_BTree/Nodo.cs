@@ -2,26 +2,25 @@
 using System.IO;
 using System.Collections.Generic;
 
-
-
 namespace Bib_BTree
 {
-    public class Nodo<T> where T : IComparable
+    public class Nodo<TKey, T>
     {
-        public int grado { get; set; }
+        public Nodo(int grado)
+        {
+            this.grado = grado;
+            this.Children = new List<Nodo<TKey, T>>(grado + 1);
+            this.Entradas = new List<BEntry<TKey, T>>(grado);
+        }
+
+        private int grado { get; set; }
         public int Id { get; set; }
         public int Father { get; set; }
         public List<T> Values { get; set; }
-        public List<T> Children { get; set; }
+        public List<Nodo<TKey, T>> Children { get; set; }
+        public List<BEntry<TKey, T>> Entradas { get; set; }
 
         public int SizeNodoLenght => 5 * (grado - 1) + (grado * 5) + 4 + 4 + 5;
-
-        public Nodo(int grado)
-        {
-            Values = new List<T>();
-            Children = new List<T>();
-            this.grado = grado;
-        }
 
         public List<string> ArregloValoresMayores(List<string> values)
         {

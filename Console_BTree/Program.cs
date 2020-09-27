@@ -11,7 +11,7 @@ namespace Console_BTree
             Console.WriteLine("\t..::Ábol B en Disco::..\n\n");
             Console.WriteLine("Ingrese el grado del árbol");
             var grado = Convert.ToInt16(Console.ReadLine());
-            var Arbol = new ArbolB<int>(grado);
+            //var Arbol = new ArbolB<int>(grado);
             
             while (true)
             {
@@ -27,9 +27,9 @@ namespace Console_BTree
                     int ingresado = 0;
                     int.TryParse(Console.ReadLine(), out ingresado);
                     //Llamar árbol
-                    ArbolB<string> arbolB = new ArbolB<string>(grado);
+                    //ArbolB<string> arbolB = new ArbolB<string>(grado);
                     string ingresado1 = $"{ingresado:0000;-000}";
-                    arbolB.Insert(ingresado1);
+                    //arbolB.Insert(ingresado1);
                 }
                 else if (resultado == 2)
                 {
