@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Bib_BTree.Helper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Bib_BTree.Helper;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace API_Arbol.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class MovieController : ControllerBase
     {
         [HttpGet]
         public IEnumerable<string> Get()
