@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bib_BTree.Models
 {
-    public class Movie<TKey> where TKey : IComparable
+    public class Movie
     {
         public string director { get; set; }
         [Required]
@@ -22,7 +22,7 @@ namespace Bib_BTree.Models
 
         public int CompareTo(object obj)
         {
-            var movie2 = (Movie<TKey>)obj;
+            var movie2 = (Movie)obj;
             if (GetMax(title) > GetMax(movie2.title)) return 1;
             else if (GetMax(title) < GetMax(movie2.title)) return -1;
             else return (title.CompareTo(movie2.title));
