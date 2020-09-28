@@ -1,9 +1,13 @@
 ﻿using Bib_BTree.Helper;
+using Bib_BTree.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace API_Arbol.Controllers
 {
@@ -75,11 +79,28 @@ namespace API_Arbol.Controllers
         /// <response code="500">El grado no se ha ingresado o el archivo no tiene estructura Json.</response>>
         /// <returns></returns>
         [HttpPost, Route("populate")]
-        public string InsertarVarios([FromForm] IFormFile file)
+        public async Task<string> InsertarVarios([FromForm] IFormFile file)
         {
             if (true && Data.grado > 2)
             {
-                //Ingresar valores de Json
+                using var ContentMemory = new MemoryStream();
+                await file.CopyToAsync(ContentMemory);
+                var content = Encoding.ASCII.GetString(ContentMemory.ToArray());
+                var nuevo = JsonConvert.DeserializeObject<List<Movie>>(content);
+
+                foreach (var item in nuevo)
+                {
+                    var movie = new Movie
+                    {
+                        director = item.director,
+                        imdbRating = item.imdbRating,
+                        genre = item.genre,
+                        releaseDate = item.releaseDate,
+                        rottenTomatoesRating = item.rottenTomatoesRating,
+                        title = item.title
+                    };
+
+                }
                 return "Valores insertados correctamente.";
             }
             else { throw new ArgumentException($"El grado {Data.grado} del árbol es incorrecto o el archivo no cuenta con estructura Json."); }
