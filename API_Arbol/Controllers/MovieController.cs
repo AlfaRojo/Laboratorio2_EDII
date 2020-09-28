@@ -103,7 +103,7 @@ namespace API_Arbol.Controllers
                         title = item.title,
                         nombre_año = Convert.ToInt32(meta[3])
                     };
-                    Data.Instance.temp.Insertar(Convert.ToInt32(meta[3]), movie);
+                    Data.Instance.temp.Insertar(Convert.ToInt32(meta[3]), movie);//Modificar el aumentador
                 }
                 return "Valores insertados correctamente.";
             }

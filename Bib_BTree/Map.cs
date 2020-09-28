@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Bib_BTree
 {
@@ -10,7 +11,7 @@ namespace Bib_BTree
 
         public bool Equals(Map<TKey, TNext> other)
         {
-            return this.Value.Equals(other.Value) && this.Next.Equals(other.Next);
+            return this.Value.Equals(other.Value) && this.Next.Equals(other.Next);  
         }
 
     }
