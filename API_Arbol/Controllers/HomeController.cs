@@ -39,7 +39,7 @@ namespace API_Arbol.Controllers
         /// <response code="500">El válir ingresado no es válido.</response>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Orden([FromForm] int grado)
+        public ActionResult Orden([FromBody] int grado)
         {
             int value = 0;
             if (int.TryParse(grado.ToString(), out value))

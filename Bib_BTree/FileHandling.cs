@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Bib_BTree
 {
-    public class FileHandling<T> where T : IComparable
+    public class FileHandling
     {
         /// <summary>
         /// Se realiza la creación del archivo en la ruta del proyecto
@@ -18,6 +18,17 @@ namespace Bib_BTree
                 string start = $"000{Data.grado.ToString("000;-000")}|0000|0001|";
                 File.WriteAllText(Data.Instance.ruta, start);
             }
+        }
+        public List<string> getMetadata()
+        {
+            var linea = string.Empty;
+            using (var file = new StreamReader(Data.Instance.ruta))
+            {
+                linea = file.ReadLine();
+            }
+            List<string> retorno = new List<string>();
+            retorno.AddRange(linea.Split('|'));
+            return retorno;
         }
         /// <summary>
         /// Devuelve una lista con posiciones
