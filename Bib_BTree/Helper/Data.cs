@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bib_BTree.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace Bib_BTree.Helper
         //Add structures
         public static int grado;
         public string ruta;
+        public ArbolB<int, Movie> temp = new ArbolB<int, Movie>(Data.grado);
         public List<string> arbol_Temp = new List<string>();
     }
 }

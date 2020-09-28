@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Bib_BTree;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace API_Arbol.Controllers
 {
@@ -87,7 +89,8 @@ namespace API_Arbol.Controllers
                 await file.CopyToAsync(ContentMemory);
                 var content = Encoding.ASCII.GetString(ContentMemory.ToArray());
                 var nuevo = JsonConvert.DeserializeObject<List<Movie>>(content);
-
+                FileHandling manejo = new FileHandling();
+                var meta = manejo.getMetadata();
                 foreach (var item in nuevo)
                 {
                     var movie = new Movie
@@ -97,8 +100,11 @@ namespace API_Arbol.Controllers
                         genre = item.genre,
                         releaseDate = item.releaseDate,
                         rottenTomatoesRating = item.rottenTomatoesRating,
-                        title = item.title
+                        title = item.title,
+                        nombre_año = Convert.ToInt32(meta[3])
                     };
+                    Data.Instance.temp.Insertar(Convert.ToInt32(meta[3]), movie);
+
 
                 }
                 return "Valores insertados correctamente.";

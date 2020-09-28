@@ -6,7 +6,7 @@ using Bib_BTree.Helper;
 
 namespace Bib_BTree
 {
-    public class ArbolB<TKey, T> where TKey : IComparable<TKey>
+    public class ArbolB<TKey, T> where TKey: IComparable<TKey>
     {
         public Nodo<TKey, T> Raiz { get; set; }
         public int Grado { get; set; }
