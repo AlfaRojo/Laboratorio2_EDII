@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using Bib_BTree.Helper;
 
 namespace Bib_BTree
 {
@@ -79,7 +80,6 @@ namespace Bib_BTree
                     return;
                 }
             }
-
         }
 
         private void DividirHijo(Nodo<TKey, T> padreNodo, int nodoCorrer, Nodo<TKey, T> nodoMover)
@@ -120,7 +120,16 @@ namespace Bib_BTree
             }
             padreNodo.Children.Insert(nodoCorrer + 1, nuevoNodo);
         }
+        private BEntry<TKey, T> BusquedaInterna(Nodo<TKey, T> node, TKey key)
+        {
+            int i = node.Entradas.TakeWhile(entry => key.CompareTo(entry.LLave) > 0).Count();
 
+            if (i < node.Entradas.Count && node.Entradas[i].LLave.CompareTo(key) == 0)
+            {
+                return node.Entradas[i];
+            }
+            return node.EsHoja ? null : this.BusquedaInterna(node.Children[i], key);
+        }
 
         #region Anterior
         //public void Insert(T Value)
