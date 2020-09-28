@@ -1,8 +1,6 @@
 ﻿using Bib_BTree.Helper;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Bib_BTree
 {
@@ -74,7 +72,7 @@ namespace Bib_BTree
         //                string linea = lectura.ReadLine();
         //                if (!String.IsNullOrEmpty(linea))
         //                {
-                           
+
 
         //                }
         //            }
@@ -95,7 +93,7 @@ namespace Bib_BTree
         /// </summary>
         /// <param name="father"></param>
         /// <returns></returns>
-       
+
         public List<int> Obtener_Hijos(string father)
         {
             List<int> H = new List<int>();
@@ -123,7 +121,7 @@ namespace Bib_BTree
             M.Add("0001");
             M.Add("0000");
             M.Add("0002");
-            return M; 
+            return M;
         }
     }
 }

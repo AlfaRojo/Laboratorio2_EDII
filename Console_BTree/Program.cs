@@ -1,6 +1,4 @@
 ﻿using System;
-using Bib_BTree;
-using System.Collections.Generic;
 
 namespace Console_BTree
 {
@@ -12,10 +10,10 @@ namespace Console_BTree
             Console.WriteLine("Ingrese el grado del árbol");
             var grado = Convert.ToInt16(Console.ReadLine());
             //var Arbol = new ArbolB<int>(grado);
-            
+
             while (true)
             {
-               
+
                 Console.WriteLine("\n1) Ingresar valores");
                 Console.WriteLine("2) Salir \n");
                 int resultado = 0;
@@ -40,7 +38,7 @@ namespace Console_BTree
                     Console.WriteLine("Ingresa un valor válido");
                 }
             }
-            
+
         }
     }
 }

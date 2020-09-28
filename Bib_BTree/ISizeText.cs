@@ -1,5 +1,4 @@
-﻿using System;
-namespace Bib_BTree
+﻿namespace Bib_BTree
 {
     public interface ISizeText
     {

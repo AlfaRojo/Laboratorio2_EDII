@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Bib_BTree
 {
@@ -53,7 +51,7 @@ namespace Bib_BTree
             if (grado % 2 == 0)
             {
                 var ValoresMinimos = (grado / 2) - 1;
-                
+
                 for (int i = 0; i < ValoresMinimos; i++)
                 {
                     ArregloValoresM.Add(values[(values.Count - 1) - i]);
@@ -62,7 +60,7 @@ namespace Bib_BTree
             }
             else
             {
-                var PosicionMedia = ((grado - 1) / 2) + 1 ;
+                var PosicionMedia = ((grado - 1) / 2) + 1;
                 for (int i = PosicionMedia; i < values.Count; i++)
                 {
                     ArregloValoresM.Add(values[i]);
@@ -78,7 +76,7 @@ namespace Bib_BTree
             if (grado % 2 == 0)
             {
                 var ValoresMinimos = (grado / 2) - 1;
-                
+
                 int i;
                 for (i = 0; i < ValoresMinimos + 1; i++)
                 {
@@ -89,7 +87,7 @@ namespace Bib_BTree
                     }
                 }
 
-               
+
             }
             else
             {
@@ -97,14 +95,14 @@ namespace Bib_BTree
 
                 for (int i = 0; i < PosicionMedia + 1; i++)
                 {
-                    if(i == PosicionMedia)
+                    if (i == PosicionMedia)
                     {
                         valorMedio = (values[PosicionMedia]);
                         return valorMedio;
                     }
                 }
             }
-            return valorMedio ;
+            return valorMedio;
         }
 
         //Convertir el objeto en una linea de string
